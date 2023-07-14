@@ -108,7 +108,40 @@ console.log("Count of each letter:", count);
 
 // 8. Parašyti funkciją - lygineSuma. Funkcijos parametrai - du kintamieji. Testų reikalavimai - abu kitamieji turi būti arba skaičiai arba masyvai(negali būti vienas skaičius, kitas masyvas).
 // Jei kintamieji skaičiai, grąžinti skaičių sumą, jei kintamieji masyvai - grąžinti masyvų ilgių sumą. Jei abu kintamieji skaičiai arba masyvai, bet suma nelyginė - grąžinti tekstą, kad suma nelyginė. (10 taškų)
-   
+function evenSum(a, b) {
+  if ((typeof a === 'number' && Array.isArray(b)) || (Array.isArray(a) && typeof b === 'number')) {
+    return "Error. Vienas kintamasis turi būti skaičius, o kitas masyvas.";
+  }
+
+  if (typeof a === 'number' && typeof b === 'number') {
+    const sum = a + b;
+    if (sum % 2 === 0) {
+      return sum;
+    } else {
+      return "Suma nelyginė.";
+    }
+  }
+
+  if (Array.isArray(a) && Array.isArray(b)) {
+    const sum = a.length + b.length;
+    if (sum % 2 === 0) {
+      return sum;
+    } else {
+      return "Suma nelyginė.";
+    }
+  }
+
+  return "Error. Abu kintamieji turi būti skaičiai arba masyvai.";
+}
+
+// Pvz:
+console.log(evenSum(2, 4)); //6 (suma yra lygi)
+console.log(evenSum([1, 2, 3], [4, 5])); //5 (suma yra nelyginė)
+console.log(evenSum([1, 2], 4)); // Suma nelyginė
+console.log(evenSum(2, [1, 2, 3])); //Suma nelyginė
+console.log(evenSum(7, [1, 2, 3])); // Err. Vienas kintamasis turi būti skaičius, o kitas – masyvas.
+console.log(evenSum([1, 2], [3, 4])); //4 (suma yra lygi)
+console.log(evenSum("hello", [1, 2])); //Err. Abu kintamieji turi būti skaičiai arba masyvai.
 
 // 9. Parašyti funkciją pirminisSkaicius. Funkcija turi vieną kintamąjį. Turi būti patikrinimas, kad kintamasis yra skaičius. Funkcija turi grąžinti ar pateiktas skaičius yra pirminis( pirminis
 // skaičius yra tas, kuris dalinasi tik iš savęs ir tik iš vieneto be liekanos.) (10 taškų)
@@ -132,3 +165,25 @@ console.log(pirminisSkaicius(-5));
 
 // 10. Parašyti funkciją telefonoNumeris. Funkcija turi priimti vieną kintamąjį - masyvą. Masyvo elementai - skaičiai, ilgis - 10. Funkcija turi grąžinti telefono numerį tokiu formatu -
 // "(XXX) XXX-XXXX". (10 taškų)
+
+function phoneNumber(numbers) {
+  if (!Array.isArray(numbers)) {
+    return "Error. Pateikite masyvą.";
+  }
+
+  if (numbers.length !== 10) {
+    return "Error. Masyvo ilgis turi būti 10.";
+  }
+
+  const formattedNumber = numbers.join('');
+  return `(${formattedNumber.slice(0, 3)}) ${formattedNumber.slice(3, 6)}-${formattedNumber.slice(6)}`;
+}
+
+// Pvz:
+const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const formattedPhoneNumber = phoneNumber(numberArray);
+console.log(formattedPhoneNumber);
+
+
+
+
